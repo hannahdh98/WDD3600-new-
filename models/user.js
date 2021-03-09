@@ -32,6 +32,8 @@ class User {
         quantity: newQuantity
       });
     }
+    
+    
     const updatedCart = {
       items: updatedCartItems
     };
