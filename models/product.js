@@ -1,3 +1,4 @@
+//import mongodb
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
@@ -11,6 +12,7 @@ class Product {
     this.userId = userId;
   }
 
+  //saves in db
   save() {
     const db = getDb();
     let dbOp;
@@ -30,6 +32,7 @@ class Product {
       });
   }
 
+  //gets the access to the db and gets the products
   static fetchAll() {
     const db = getDb();
     return db
