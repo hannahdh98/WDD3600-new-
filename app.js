@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 app.use((req, res, next) => {
   //uses id to search for that user
-  User.findById('')//my mongo compass wont connect so I am not able to get this id.
+  User.findById('6048fe5037c6e1ff075b8ed1')
     .then(user => {
       req.user = new User(user.name, user.email, user.cart, user._id);
       next();
