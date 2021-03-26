@@ -3,8 +3,8 @@ const MongoClient = mongodb.MongoClient;
 
 let _db;
 //this will connect to my database usng the url string
-const mongoConnect = callback => {
-  MongoClient.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongoConnect = (callback) => {
+  MongoClient.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority'
   )
     .then(client => {
       console.log('Connected!');
