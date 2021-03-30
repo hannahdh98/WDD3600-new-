@@ -1,5 +1,6 @@
+//imports the path
 const path = require('path');
-
+//imports express
 const express = require('express');
 
 const shopController = require('../controllers/shop');
@@ -22,4 +23,5 @@ router.post('/create-order', shopController.postOrder);
 
 router.get('/orders', shopController.getOrders);
 
+//exports the router
 module.exports = router;
