@@ -3,6 +3,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require ('mongoose');
 
 //imports error.js
 const errorController = require('./controllers/error');
@@ -46,6 +47,6 @@ app.use(shopRoutes);
 //get404 function
 app.use(errorController.get404);
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority').then(result => {
   app.listen(3000);
 });
