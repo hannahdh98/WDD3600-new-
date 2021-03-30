@@ -47,6 +47,13 @@ app.use(shopRoutes);
 //get404 function
 app.use(errorController.get404);
 
-mongoose.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority').then(result => {
+mongoose
+.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority')
+
+.then(result => {
   app.listen(3000);
+
+})
+.catch(err => {
+  console.log(err);
 });
