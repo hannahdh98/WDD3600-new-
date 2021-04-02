@@ -7,7 +7,7 @@ const mongoose = require ('mongoose');
 
 //imports error.js
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
+//const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
 //imports modules
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
   //uses id to search for that user
   User.findById('6048fe5037c6e1ff075b8ed1')
     .then(user => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch(err => console.log(err));
@@ -48,11 +48,22 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoose
-.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority')
-
+.connect('mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority'
+)
 .then(result => {
+  User.findOne().then(user => {
+    if (!user) {
+      const user = new User({
+        name: 'Max',
+        email: 'max@test.com',
+        cart: {
+          items: []
+        }
+      });
+      user.save();
+    }
+  });
   app.listen(3000);
-
 })
 .catch(err => {
   console.log(err);
