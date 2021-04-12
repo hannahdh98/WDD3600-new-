@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+    <!--This code has the stylesheets-->
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
@@ -10,7 +11,9 @@
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <form class="login-form" action="/login" method="POST">
+        <!--The code below creates the login form-->
+        <form class="login-form" action="/signup" method="POST">
+            <!--The code below creates the inputs for the Email, Passowrd and a button for the confirm passowrd-->
             <div class="form-control">
                 <label for="email">E-Mail</label>
                 <input type="email" name="email" id="email">
@@ -19,11 +22,13 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
             </div>
+            <div class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword">
+            </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Login</button>
+            <!--The code below creates the button Sign up-->
+            <button class="btn" type="submit">Signup</button>
         </form>
-        <div class="centered">
-            <a href="/reset">Reset Password</a>
-        </div>
     </main>
 <%- include('../includes/end.ejs') %>

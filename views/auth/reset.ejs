@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+    <!--this connects to the stylesheets-->
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
@@ -10,20 +11,17 @@
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <form class="login-form" action="/login" method="POST">
+                <!--The code below creates the login form-->
+        <form class="login-form" action="/reset" method="POST">
             <div class="form-control">
+                <!--The code below creates the Email form-->
                 <label for="email">E-Mail</label>
                 <input type="email" name="email" id="email">
             </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
-            </div>
+            <!--The code for the crsf-->
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Login</button>
+            <!--The code below creates the Reset button-->
+            <button class="btn" type="submit">Reset Password</button>
         </form>
-        <div class="centered">
-            <a href="/reset">Reset Password</a>
-        </div>
     </main>
 <%- include('../includes/end.ejs') %>
