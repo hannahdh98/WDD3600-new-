@@ -1,5 +1,4 @@
 <%- include('../includes/head.ejs') %>
-    <!--This code has the stylesheets-->
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
@@ -11,23 +10,35 @@
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <!--The code below creates the login form-->
-        <form class="login-form" action="/signup" method="POST">
-            <!--The code below creates the inputs for the Email, Passowrd and a button for the confirm passowrd-->
+        <form class="login-form" action="/signup" method="POST" novalidate>
             <div class="form-control">
                 <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
+                <input
+                    class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value="<%= oldInput.email %>">
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <input
+                    class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                    type="password"
+                    name="password"
+                    id="password"
+                    value="<%= oldInput.password %>">
             </div>
             <div class="form-control">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword">
+                <input
+                    class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    value="<%= oldInput.confirmPassword %>">
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <!--The code below creates the button Sign up-->
             <button class="btn" type="submit">Signup</button>
         </form>
     </main>

@@ -15,8 +15,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-      //*** is where you need to add your password and where it states username, you need to add your mongodm cluster username.
-'mongodb+srv://username:****@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
+'mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
 
 //imports modules
 const app = express();
