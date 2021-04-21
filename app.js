@@ -15,6 +15,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
+      //use your username and password for mongodb
 'mongodb+srv://username:*****@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
 
 //imports modules
