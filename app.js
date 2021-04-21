@@ -15,7 +15,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-'mongodb+srv://hannah_hitchcock12:Purple12@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
+'mongodb+srv://username:*****@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
 
 //imports modules
 const app = express();
