@@ -15,8 +15,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-      //use your username and password for mongodb
-'mongodb+srv://username:*****@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
+'mongodb+srv://hannah_hitchcock12:****@cluster0.mzrnx.mongodb.net/shop?retryWrites=true&w=majority';
 
 //imports modules
 const app = express();
@@ -34,7 +33,7 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
 
-//has the bodyParser, parse the body that is sent throuhght the form
+//has the bodyParser, parse the body that is sent throuhought the form
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
@@ -47,14 +46,21 @@ app.use(
 );
 app.use(csrfProtection);
 app.use(flash());
+
+//uses the csrf token and flash
+app.use(csrfProtection);
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 // app.use ((req, res, next) => {
 //     User.findById()
 //     .then
 // });
-
-app.use(csrfProtection);
-app.use(flash());
-
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
@@ -76,15 +82,26 @@ app.use('/admin',adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
+app.get('/500', errorController.get500);
+
 app.use(errorController.get404);
 
+app.use((error, req, res, next) => {
+  // res.redirect('/500');
+  res.status(500).render('500', {
+    pageTitle: 'Error!',
+    path:'/500',
+    isAuthenticated: req.session.isLoggedIn });
+});
+
+//mongoose
 mongoose
   .connect(
     MONGODB_URI
-    )
-  .then(result => {
-    app.listen(3000);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+  )
+.then(result =>{
+  app.listen(3000);
+})
+.catch(err => {
+  console.log(err);
+});

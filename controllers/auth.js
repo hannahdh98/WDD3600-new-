@@ -6,11 +6,11 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check');
 
 const User = require('../models/user');
-
+// nodemailer api key
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      //you will need to create an account from sendgrid and create an api key mine is commented out for safety purposes
+      //enter your api key below
       api_key:
         ''
     }
@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport(
 );
 
 exports.getLogin = (req, res, next) => {
+//flash error
   let message = req.flash('error');
   if (message.length > 0) {
     message = message[0];
@@ -59,10 +60,11 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
+//this will get the errors
    const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
+    //error status code 422
     return res.status(422)
     .render('auth/login', {
       path: '/login',
@@ -76,9 +78,11 @@ exports.postLogin = (req, res, next) => {
     });
   }
 
+//this will use the user.fineOne to find a specific user
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
+      //error status code returned if login is not correct
         return res.status(422)
         .render('auth/login', {
           path: '/login',
@@ -91,6 +95,7 @@ exports.postLogin = (req, res, next) => {
           validationErrors: []
         });
       }
+      //keeps password safe with bycrypt
       bcrypt
         .compare(password, user.password)
         .then(doMatch => {
@@ -102,6 +107,7 @@ exports.postLogin = (req, res, next) => {
               res.redirect('/');
             });
           }
+          //error status code
         return res.status(422)
         .render('auth/login', {
             path: '/login',
@@ -163,14 +169,18 @@ exports.postSignup = (req, res, next) => {
          html: '<h1>You successfully signed up!</h1>'
        });
     })
+    //error message with status code 500
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
     console.log(err);
+    //redirects to homepage
     res.redirect('/');
   });
 };
@@ -189,6 +199,7 @@ exports.getReset = (req, res, next) => {
   });
 };
 
+
 exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
@@ -199,6 +210,7 @@ exports.postReset = (req, res, next) => {
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
+        //flash error if there is not account with that email
           req.flash('error', 'No account with that email found.');
           return res.redirect('/reset');
         }
@@ -210,6 +222,7 @@ exports.postReset = (req, res, next) => {
         res.redirect('/');
         transporter.sendMail({
           to: req.body.email,
+          //email that will send request to.
           from: 'hitchh9752@clarkstate.edu',
           subject: 'Password reset',
           html: `
@@ -218,12 +231,17 @@ exports.postReset = (req, res, next) => {
           `
         });
       })
+      //error message with status code 500
       .catch(err => {
-        console.log(err);
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
   });
 };
 
+
+//this will allow the user to get a new password
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
   User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
@@ -242,8 +260,11 @@ exports.getNewPassword = (req, res, next) => {
         passwordToken: token
       });
     })
+    //error message
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -271,7 +292,10 @@ exports.postNewPassword = (req, res, next) => {
     .then(result => {
       res.redirect('/login');
     })
+    //error message and status code 500
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

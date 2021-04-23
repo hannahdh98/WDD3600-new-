@@ -25,7 +25,7 @@ const userSchema = new Schema({
     ]
   }
 });
-
+//add to cart method
 userSchema.methods.addToCart = function(product) {
   const cartProductIndex = this.cart.items.findIndex(cp => {
     return cp.productId.toString() === product._id.toString();
@@ -45,18 +45,22 @@ userSchema.methods.addToCart = function(product) {
   const updatedCart = {
     items: updatedCartItems
   };
+  //updates the cart with user input
   this.cart = updatedCart;
   return this.save();
 };
 
+//removes items from cart
 userSchema.methods.removeFromCart = function(productId) {
   const updatedCartItems = this.cart.items.filter(item => {
     return item.productId.toString() !== productId.toString();
   });
   this.cart.items = updatedCartItems;
+  //saves items
   return this.save();
 };
 
+//clears the items in the cart
 userSchema.methods.clearCart = function() {
   this.cart = { items: [] };
   return this.save();

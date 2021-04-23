@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+                    <!--imports the stylesheet -->
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
@@ -8,9 +9,11 @@
 
     <main>
         <% if (errorMessage) { %>
+                            <!--error message -->
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
         <form class="login-form" action="/login" method="POST">
+                            <!--email form-->
             <div class="form-control">
                 <label for="email">E-Mail</label>
                 <input

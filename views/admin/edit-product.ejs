@@ -8,6 +8,7 @@
 
     <main>
         <% if (errorMessage) { %>
+        <!--user message error message-->
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
         <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
@@ -22,6 +23,7 @@
             </div>
             <div class="form-control">
                 <label for="imageUrl">Image URL</label>
+                                    <!--url for the user to input for image -->
                 <input
                     class="<%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>"
                     type="text"
@@ -30,6 +32,7 @@
                     value="<% if (editing || hasError) { %><%= product.imageUrl %><% } %>">
             </div>
             <div class="form-control">
+                                <!--Price label with number, and price -->
                 <label for="price">Price</label>
                 <input
                     class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
@@ -40,6 +43,7 @@
                     value="<% if (editing || hasError) { %><%= product.price %><% } %>">
             </div>
             <div class="form-control">
+                    <!--Description label -->
                 <label for="description">Description</label>
                 <textarea
                     class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
