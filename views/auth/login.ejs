@@ -1,35 +1,35 @@
 <%- include('../includes/head.ejs') %>
-                    <!--imports the stylesheet -->
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
 
 <body>
-   <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/navigation.ejs') %>
+
 
     <main>
         <% if (errorMessage) { %>
-                            <!--error message -->
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
+        <!--login form-->
         <form class="login-form" action="/login" method="POST">
-                            <!--email form-->
+            <!--email form-->
             <div class="form-control">
                 <label for="email">E-Mail</label>
-                <input
-                    class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                    type="email"
-                    name="email"
-                    id="email"
+                <input 
+                class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email" 
+                    name="email" 
+                    id="email" 
                     value="<%= oldInput.email %>">
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
-                <input
+                <input 
                     class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
-                    type="password"
-                    name="password"
-                    id="password"
+                    type="password" 
+                    name="password" 
+                    id="password" 
                     value="<%= oldInput.password %>">
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -39,4 +39,4 @@
             <a href="/reset">Reset Password</a>
         </div>
     </main>
-<%- include('../includes/end.ejs') %>
+    <%- include ('../includes/end.ejs') %>

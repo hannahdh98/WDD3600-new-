@@ -7,10 +7,12 @@ function backdropClickHandler() {
   sideDrawer.classList.remove('open');
 }
 
+//mobile meny toggle function
 function menuToggleClickHandler() {
   backdrop.style.display = 'block';
   sideDrawer.classList.add('open');
 }
 
+//call backdropClickHandler function
 backdrop.addEventListener('click', backdropClickHandler);
 menuToggle.addEventListener('click', menuToggleClickHandler);

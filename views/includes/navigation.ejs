@@ -45,7 +45,7 @@
         </ul>
     </nav>
 </header>
-
+<!--mobile navigation-->
 <nav class="mobile-nav">
     <ul class="mobile-nav__item-list">
         <li class="mobile-nav__item">
@@ -70,6 +70,7 @@
                 </a>
             </li>
         <% } %>
+        <!--authentication-->
         <% if (!isAuthenticated) { %>
             <li class="mobile-nav__item">
                 <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>

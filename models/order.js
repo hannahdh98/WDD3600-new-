@@ -1,7 +1,8 @@
+//import statements
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const orderSchema = new Schema ({//this will store the data in a new schema
-//products
+const orderSchema = new Schema ({
+
     products: [
         {
             product: { type: Object, required: true},
@@ -9,7 +10,7 @@ const orderSchema = new Schema ({//this will store the data in a new schema
         }
     ],
     user: { 
-        name: {
+        email: {
             type: String,
             required: true
         },
@@ -20,5 +21,4 @@ const orderSchema = new Schema ({//this will store the data in a new schema
         }
     }
 });
-//this will export the order
 module.exports = mongoose.model('Order', orderSchema);

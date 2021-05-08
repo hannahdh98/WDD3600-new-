@@ -10,11 +10,10 @@ const User = require('../models/user');
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      //enter your api key below
       api_key:
-        ''
+        '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'
     }
-  })
+  }) 
 );
 
 exports.getLogin = (req, res, next) => {
@@ -79,15 +78,14 @@ exports.postLogin = (req, res, next) => {
   }
 
 //this will use the user.fineOne to find a specific user
-  User.findOne({ email: email })
+User.findOne({ email: email })
     .then(user => {
       if (!user) {
-      //error status code returned if login is not correct
         return res.status(422)
         .render('auth/login', {
           path: '/login',
           pageTitle: 'Login',
-          errorMessage: 'Invalid email or password.',
+          errorMessage: 'Invalid email or password',
           oldInput: {
             email: email,
             password: password
@@ -118,14 +116,18 @@ exports.postLogin = (req, res, next) => {
               password: password
             },
             validationErrors: []
-          });
-        })
+        });
+      })
         .catch(err => {
           console.log(err);
           res.redirect('/login');
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+    });
 };
 
 exports.postSignup = (req, res, next) => {
@@ -164,7 +166,7 @@ exports.postSignup = (req, res, next) => {
       res.redirect('/login');
       return transporter.sendMail({
          to: email,
-         from: 'hitchh9752@clarkstate.edu',
+         from: '',
          subject: 'Signup succeeded!',
          html: '<h1>You successfully signed up!</h1>'
        });
@@ -223,7 +225,7 @@ exports.postReset = (req, res, next) => {
         transporter.sendMail({
           to: req.body.email,
           //email that will send request to.
-          from: 'hitchh9752@clarkstate.edu',
+          from: '',
           subject: 'Password reset',
           html: `
             <p>You requested a password reset</p>

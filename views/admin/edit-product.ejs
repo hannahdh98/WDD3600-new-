@@ -1,6 +1,7 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
@@ -22,26 +23,23 @@
                     value="<% if (editing || hasError) { %><%= product.title %><% } %>">
             </div>
             <div class="form-control">
-                <label for="imageUrl">Image URL</label>
-                                    <!--url for the user to input for image -->
+                <label for="image">Image</label>
                 <input
-                    class="<%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>"
-                    type="text"
-                    name="imageUrl"
-                    id="imageUrl"
-                    value="<% if (editing || hasError) { %><%= product.imageUrl %><% } %>">
+                    type="file" 
+                    name="image" 
+                    id="image" >
             </div>
             <div class="form-control">
-                                <!--Price label with number, and price -->
                 <label for="price">Price</label>
-                <input
-                    class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
-                    type="number"
-                    name="price"
-                    id="price"
-                    step="0.01"
+                <input 
+                class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
+                    type="number" 
+                    name="price" 
+                    id="price" 
+                    step="0.01" 
                     value="<% if (editing || hasError) { %><%= product.price %><% } %>">
             </div>
+         
             <div class="form-control">
                     <!--Description label -->
                 <label for="description">Description</label>
