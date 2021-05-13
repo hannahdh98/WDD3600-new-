@@ -8,6 +8,7 @@
   max-width: 90%;
 }
 
+/*cart item aligning the items*/
 .cart__item {
   display: flex;
   align-items: center;
@@ -17,6 +18,7 @@
   margin-bottom: 1rem;
 }
 
+/*cart item h1 and h2 sizes*/
 .cart__item h1,
 .cart__item h2 {
   margin-right: 1rem;
