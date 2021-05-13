@@ -1,3 +1,4 @@
+/*product form styles*/
 .product-form {
     width: 20rem;
     max-width: 90%;
@@ -5,23 +6,27 @@
     display: block;
 }
 
+/*product item styles*/
 .product-item {
     width: 20rem;
     max-width: 95%;
     margin: 1rem;
 }
 
+/*product title styles*/
 .product__title {
     font-size: 1.2rem;
     text-align: center;
 }
 
+/*product price styles*/
 .product__price {
     text-align: center;
     color: #4d4d4d;
     margin-bottom: 0.5rem;
 }
 
+/*product description styles*/
 .product__description {
     text-align: center;
 }
