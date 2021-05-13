@@ -1,21 +1,24 @@
+//importing
 const crypto = require('crypto');
-
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check');
 
 const User = require('../models/user');
+
 // nodemailer api key
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        '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'
+      // your sendgrid api key goes below
+        ''
     }
   }) 
 );
 
+//gets login info
 exports.getLogin = (req, res, next) => {
 //flash error
   let message = req.flash('error');
@@ -36,6 +39,7 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+//gets sign up info
 exports.getSignup = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -59,6 +63,7 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  
 //this will get the errors
    const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -77,7 +82,7 @@ exports.postLogin = (req, res, next) => {
     });
   }
 
-//this will use the user.fineOne to find a specific user
+//this will use the user.fineOne to find a specific users email
 User.findOne({ email: email })
     .then(user => {
       if (!user) {
@@ -86,6 +91,7 @@ User.findOne({ email: email })
           path: '/login',
           pageTitle: 'Login',
           errorMessage: 'Invalid email or password',
+          //returns user old input
           oldInput: {
             email: email,
             password: password
@@ -130,9 +136,9 @@ User.findOne({ email: email })
     });
 };
 
+//gets the email and password 
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
-
   const password = req.body.password;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -178,7 +184,7 @@ exports.postSignup = (req, res, next) => {
       return next(error);
     });
 };
-
+//logout
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
     console.log(err);
@@ -187,6 +193,7 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+//reset page
 exports.getReset = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -270,6 +277,7 @@ exports.getNewPassword = (req, res, next) => {
     });
 };
 
+//new password kept safe
 exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.password;
   const userId = req.body.userId;
