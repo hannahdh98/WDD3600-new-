@@ -1,3 +1,4 @@
+//importing
 const { validationResult } = require('express-validator/check');
 const Product = require('../models/product');
 
@@ -6,7 +7,8 @@ const mongoose = require('mongoose');
 const fileHelper = require('../util/file');
 const product = require('../models/product');
 
-//This exports the add product and exports function
+//This exports the add product and exports function 
+//This is for the admin
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
@@ -17,6 +19,7 @@ exports.getAddProduct = (req, res, next) => {
     validationErrors: []
   });
 };
+//add a new product
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;  
   const image = req.file;
@@ -35,6 +38,7 @@ exports.postAddProduct = (req, res, next) => {
         price: price,
         description: description
       },
+      //error message if the file is not an image
       errorMessage: 'Attached file is not an image.',
       validationErrors: []
     });
@@ -82,12 +86,13 @@ exports.postAddProduct = (req, res, next) => {
     });
 
 };
-
+//edit products
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect('/');
   }
+  //finds existing product by id
   const prodId = req.params.productId;
   Product.findById(prodId)
   .then(product => {
@@ -116,9 +121,8 @@ exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
   const updatedPrice = req.body.price;
-  const updatedImageUrl = req.body.imageUrl;
+  const updatedImageUrl = req.file;
   const updatedDescription = req.body.description;
-
   const errors = validationResult(req);
 
 //error status code
@@ -132,7 +136,7 @@ exports.postEditProduct = (req, res, next) => {
         title: updatedTitle,
         imageUrl: updatedImageUrl,
         price: updatedPrice,
-        description: updatedDesc,
+        description: updatedDescription,
         _id: prodId
       },
       //error messages
