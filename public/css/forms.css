@@ -1,9 +1,9 @@
 /*form margin style*/
-
 .form-control {
   margin: 1rem 0;
 }
-/*form labels, inpyt and text area styles*/
+
+/*form labels, input and text area styles*/
 .form-control label,
 .form-control input,
 .form-control textarea {
@@ -12,6 +12,7 @@
   margin-bottom: 0.25rem;
 }
 
+/*input and text area styles*/
 .form-control input,
 .form-control textarea {
   border: 1px solid #a1a1a1;
@@ -19,10 +20,13 @@
   border-radius: 2px;
 }
 
+/*outline style*/
 .form-control input:focus,
 .form-control textarea:focus {
   outline-color: #00695c;
 }
+
+/*invalid text area*/
 .form-control input.invalid,
 .form-control textarea.invalid {
   border-color: red;
