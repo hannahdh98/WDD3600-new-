@@ -1,15 +1,18 @@
+//imports
 const express = require('express');
 const { check, body } = require('express-validator/check');
 
 const authController = require('../controllers/auth');
 const User = require('../models/user');
 
+//router import
 const router = express.Router();
 
 router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
+//checks if user entry is valid: email address
 router.post(
     '/login',
     [
@@ -24,7 +27,7 @@ router.post(
     ],
         authController.postLogin
 );
-
+//sends message if email isnt valid
 router.post(
     '/signup',
     [
@@ -58,7 +61,7 @@ router.post(
     ],
         authController.postSignup);
 
-
+//routes used
 router.post('/logout', authController.postLogout);
 
 router.get('/reset', authController.getReset);
