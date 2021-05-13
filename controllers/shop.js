@@ -1,14 +1,17 @@
+//importing file system
 const fs = require('fs'); 
 const path = require('path');
 
 const PDFDocument = require('pdfkit');
-const stripe = require('stripe')(''); 
+//you will need your stripe key
+const stripe = require('stripe')(''); //stripe key here
 
 const Product = require('../models/product');
 const Order = require('../models/order');
 
 const ITEMS_PER_PAGE = 2; 
 
+//finds the products and page number
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
@@ -18,6 +21,7 @@ exports.getProducts = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
     return Product.find()
+    //skip first item
       .skip((page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE); 
   })
@@ -41,6 +45,7 @@ exports.getProducts = (req, res, next) => {
   });
 };
 
+//get product
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId)
@@ -59,6 +64,7 @@ exports.getProduct = (req, res, next) => {
     });
 };
 
+//gets the page number
 exports.getIndex = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
@@ -68,6 +74,7 @@ exports.getIndex = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
     return Product.find()
+    //skip page
       .skip((page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE);
   })
@@ -91,6 +98,7 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
+//gets the cart
 exports.getCart = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
@@ -111,6 +119,7 @@ exports.getCart = (req, res, next) => {
     });
 };
 
+//add to cart
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
     Product.findById(prodId)
@@ -123,7 +132,7 @@ exports.postCart = (req, res, next) => {
     });
   };
 
-//delets products
+//deletes cart items
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   req.user
