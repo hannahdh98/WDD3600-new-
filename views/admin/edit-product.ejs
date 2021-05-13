@@ -1,18 +1,22 @@
 <%- include('../includes/head.ejs') %>
+<!-- style sheets -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/product.css">
     <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
+<!-- navigation -->
    <%- include('../includes/navigation.ejs') %>
 
+
     <main>
+    <!-- error message -->
         <% if (errorMessage) { %>
         <!--user message error message-->
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
+        <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="title">Title</label>
                 <input
