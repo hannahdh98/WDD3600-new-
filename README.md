@@ -17,72 +17,72 @@ package-lock.json
 package.json
 READ.MD
 
-controller
+## controller/
   - admin.js
   - auth.js
   - error.js
   - shop.js
 
-data
+## data/
   - cart.json
   - products.json
   - invoices
       - invoice-6095a333ac3dc21878c5be88.pdf
       - invoice-6095a333ac3dc21878c5be88.pdf
-images
+## images/
   - book2.jpeg
   - book3.jpeg
   - pexels-leah-kelley-373465.jpg
   - pexels-rikka-ameboshi-3358707.jpg
 
-middleware
+## middleware/
   - is-auth.js 
 
-models
+## models/
   - order.js
   - product.js
   - user.js
 
-public
-  - css
+public/
+  ## css/
       - auth.css
       - cart.css
       - forms.css
       - main.css
       - orders.css
       - product.css
-  - js
+  ## js/
       - admin.js
       - main.js
 
-routes
+## routes/
   - admin.js
   - auth.js
   - shop.js
 
-util
+## util/
   - file.js
   - path.js
 
-views
+## views/
   - 404.ejs
   - 505.ejs
   - admin
       - edit-product.ejs
       - products.ejs
-  - auth
+ ## auth/
       - login.ejs
       - new-password.ejs
       - reset.ejs
       - signup.ejs
 
-  - includes
+  ## includes/
       - add-to-cart.ejs
       - end.ejs
       - head.ejs
       - navigation.ejs
       - pagination.ejs
- - shop
+ ## shop/
       - cart.ejs
       - checkout.ejs
       - index.ejs
@@ -90,9 +90,9 @@ views
       - product-detail.ejs
       - product-list.ejs
 
-#Database Structure
+# Database Structure
 
-- local
+## local/
   - clustermanager
   - oplog.rs
   - replset.election
@@ -101,10 +101,13 @@ views
   - replset.oplogTruncateAfterPoint
   - startup_log
 
-- shop
+## shop/
   - orders
   - posts
   - products
   - sessions
   - shop
   - users
+
+## messages/
+  - messages
