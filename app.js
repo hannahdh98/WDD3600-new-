@@ -14,7 +14,7 @@ const multer = require('multer');
 const errorController = require('./controllers/error');
 const shopController = require('./controllers/shop');
 const isAuth = require('./middleware/is-auth');
-//const mongoConnect = require('./util/database').mongoConnect;
+
 const User = require('./models/user');
 
 //use your own mondodb uri
