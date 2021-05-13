@@ -1,8 +1,8 @@
 const deleteProduct = (btn) => {
-    const prodId = btn.parentNode.querySelector('[name=productId]').value;
+    const prodId = btn.parentNode.querySelector('[name=productId]').value; //get the product id
     const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
 
-    const productElement = btn.closest('article');
+    const productElement = btn.closest('article'); // this will delete the article
     fetch('/admin/product/' + prodId, {
         method: 'DELETE',
         headers: {
