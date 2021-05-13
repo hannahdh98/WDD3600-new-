@@ -1,7 +1,9 @@
+//mobile nav
 const backdrop = document.querySelector('.backdrop');
 const sideDrawer = document.querySelector('.mobile-nav');
 const menuToggle = document.querySelector('#side-menu-toggle');
 
+//click handler function
 function backdropClickHandler() {
   backdrop.style.display = 'none';
   sideDrawer.classList.remove('open');
